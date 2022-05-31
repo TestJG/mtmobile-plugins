@@ -1,12 +1,19 @@
 # @testjg/nativescript-nfc
 
+Based on the great and more complete: https://github.com/EddyVerbruggen/nativescript-nfc
+
+## Installation
+
 ```javascript
 ns plugin add @testjg/nativescript-nfc
 ```
 
 ## Usage
 
-// TODO
+Make sure your AndroidManifest.xml includes the permission:
+```xml
+<uses-permission android:name="android.permission.NFC"/>
+```
 
 ## License
 
