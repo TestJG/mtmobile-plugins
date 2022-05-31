@@ -70,7 +70,14 @@ module.exports = {
           description: '@testjg/nativescript-guid: Build',
         },
       },
-      'build-all': {
+      // @testjg/nativescript-nfc
+			'nativescript-nfc': {
+				build: {
+					script: 'nx run nativescript-nfc:build.all',
+					description: '@testjg/nativescript-nfc: Build',
+				},
+			},
+			'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
       },
@@ -84,7 +91,11 @@ module.exports = {
         script: 'nx run nativescript-guid:focus',
         description: 'Focus on @testjg/nativescript-guid',
       },
-      reset: {
+      'nativescript-nfc': {
+				script: 'nx run nativescript-nfc:focus',
+				description: 'Focus on @testjg/nativescript-nfc',
+			},
+			reset: {
         script: 'nx g @testjg/plugin-tools:focus-packages',
         description: 'Reset Focus',
       },

@@ -6,8 +6,11 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   demos = [
-    {
-      name: 'nativescript-guid',
-    },
-  ];
+	{
+		name: 'nativescript-guid'
+	},
+	{
+		name: 'nativescript-nfc'
+	}
+];
 }

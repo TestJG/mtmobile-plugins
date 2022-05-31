@@ -1,11 +1,5 @@
-# @testjg/\* plugins
-
-```
-npm run setup
-npm start
-```
-
 - [@testjg/nativescript-guid](packages/nativescript-guid/README.md)
+- [@testjg/nativescript-nfc](packages/nativescript-nfc/README.md)
 
 # How to use?
 

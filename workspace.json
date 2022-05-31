@@ -3,6 +3,7 @@
   "projects": {
     "demo": "apps/demo",
     "demo-angular": "apps/demo-angular",
-    "nativescript-guid": "packages/nativescript-guid"
+    "nativescript-guid": "packages/nativescript-guid",
+    "nativescript-nfc": "packages/nativescript-nfc"
   }
 }
