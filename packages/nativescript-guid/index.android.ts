@@ -1,5 +1,1 @@
-import { NativescriptGuidCommon } from './common';
-
-export class NativescriptGuid extends NativescriptGuidCommon {
-
-}
+export const createGuid = (): string => java.util.UUID.randomUUID().toString();
