@@ -6,8 +6,14 @@
     <StackLayout class="p-20">
         <ScrollView class="h-full">
           <StackLayout>
-            <Button text="Test nativescript-nfc" tap="{{ testIt }}" class="btn btn-primary"/>
-
+            <Button text="Is NFC available?" tap="{{ available }}" class="btn btn-primary"/>
+            <Label text="{{ isAvailable }}" class="text-primary" />
+            <Button text="Is NFC enabled?" tap="{{ enabled }}" class="btn btn-primary"/>
+            <Label text="{{ isEnabled }}" class="text-primary" />
+            <Button text="Set Listener" tap="{{ setListener }}" class="btn btn-primary"/>
+            <Button text="Stop Listener" tap="{{ stopListening }}" class="btn btn-primary"/>
+            <Label text="{{ isListening ? 'Listening NFC' : 'Not listening NFC' }}" class="text-primary" />
+            <Label text="{{ lastDataRead }}" class="text-primary" textWrap="true" />
           </StackLayout>
         </ScrollView>
     </StackLayout>

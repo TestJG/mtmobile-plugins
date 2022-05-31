@@ -54,5 +54,7 @@
 		<key>NSAllowsArbitraryLoadsInWebContent</key>
 		<true/>
 	</dict>
+    <key>NFCReaderUsageDescription</key>
+    <string>For interacting with NFC tags</string>
 </dict>
 </plist>
