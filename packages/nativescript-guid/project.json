@@ -31,14 +31,10 @@
     "build.all": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": [
-          "node tools/scripts/build-finish.ts nativescript-guid"
-        ],
+        "commands": ["node tools/scripts/build-finish.ts nativescript-guid"],
         "parallel": false
       },
-      "outputs": [
-        "dist/packages/nativescript-guid"
-      ],
+      "outputs": ["dist/packages/nativescript-guid"],
       "dependsOn": [
         {
           "target": "build.all",
@@ -53,18 +49,14 @@
     "focus": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": [
-          "nx g @nativescript/plugin-tools:focus-packages nativescript-guid"
-        ],
+        "commands": ["nx g @nativescript/plugin-tools:focus-packages nativescript-guid"],
         "parallel": false
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "packages/nativescript-guid/**/*.ts"
-        ]
+        "lintFilePatterns": ["packages/nativescript-guid/**/*.ts"]
       }
     }
   },

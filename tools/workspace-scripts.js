@@ -64,13 +64,13 @@ module.exports = {
     // build output is always in dist/packages
     '@testjg': {
       // @testjg/nativescript-guid
-			'nativescript-guid': {
-				build: {
-					script: 'nx run nativescript-guid:build.all',
-					description: '@testjg/nativescript-guid: Build',
-				},
-			},
-			'build-all': {
+      'nativescript-guid': {
+        build: {
+          script: 'nx run nativescript-guid:build.all',
+          description: '@testjg/nativescript-guid: Build',
+        },
+      },
+      'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
       },
@@ -81,10 +81,10 @@ module.exports = {
     },
     focus: {
       'nativescript-guid': {
-				script: 'nx run nativescript-guid:focus',
-				description: 'Focus on @testjg/nativescript-guid',
-			},
-			reset: {
+        script: 'nx run nativescript-guid:focus',
+        description: 'Focus on @testjg/nativescript-guid',
+      },
+      reset: {
         script: 'nx g @testjg/plugin-tools:focus-packages',
         description: 'Reset Focus',
       },
