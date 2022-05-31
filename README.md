@@ -5,7 +5,7 @@ npm run setup
 npm start
 ```
 
-- @testjg
+- [@testjg/nativescript-guid](packages/nativescript-guid/README.md)
 
 # How to use?
 
