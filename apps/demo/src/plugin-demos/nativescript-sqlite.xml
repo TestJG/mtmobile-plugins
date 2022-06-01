@@ -6,8 +6,15 @@
     <StackLayout class="p-20">
         <ScrollView class="h-full">
           <StackLayout>
-            <Button text="Test nativescript-sqlite" tap="{{ testIt }}" class="btn btn-primary"/>
-
+            <Label text="You should run db calls in a worker as ui thread will freeze" class="t-20 text-center c-black" textWrap="true"/>
+            <ActivityIndicator busy="true" verticalAlignment="center" class="m-20"></ActivityIndicator>
+            <Button text="Insert Data! (slow)" tap="{{ onInsert }}" class="btn btn-primary m-20"></Button>
+            <Button text="Insert Data! (with transaction, fast)" tap="{{ onInsertWithTrans }}"
+              class="btn btn-primary m-20"></Button>
+            <Button text="Insert Corrupted Data! (with transaction so rollback)" tap="{{ onInsertWithRollback }}"
+              class="btn btn-primary m-20"></Button>
+            <Button text="Select Data!" tap="{{ onSelect }}" class="btn btn-primary m-20"></Button>
+            <Button text="Reset Data!" tap="{{ onReset }}" class="btn btn-primary m-20"></Button>
           </StackLayout>
         </ScrollView>
     </StackLayout>
