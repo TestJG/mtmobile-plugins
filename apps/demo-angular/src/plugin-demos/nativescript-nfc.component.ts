@@ -1,4 +1,5 @@
 import { Component, NgZone } from '@angular/core';
+import { isAndroid } from '@nativescript/core';
 import { NgNfcService } from '@testjg/nativescript-nfc/angular';
 import type { NfcNdefData } from '@testjg/nativescript-nfc/interfaces';
 
@@ -33,6 +34,7 @@ export class NativescriptNfcComponent {
   updateLastDataRead(data: NfcNdefData) {
     this._ngZone.run(() => {
       this.lastDataRead = JSON.stringify(data);
+      this.isListening = isAndroid;
     });
   }
 
