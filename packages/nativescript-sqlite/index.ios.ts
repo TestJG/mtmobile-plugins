@@ -7,8 +7,6 @@ import {
   throwError,
 } from './common';
 
-declare const sqlitehelper: { getTrans: () => interop.FunctionReference<any> };
-
 type DbPtr = interop.Reference<any>;
 
 const iosProperty = <T extends any>(_self, property: T): T => {
@@ -165,13 +163,19 @@ const step = (statement: interop.Reference<any>) => {
   return result;
 };
 
+// Transient Destructor Behavior. (https://www.sqlite.org/c3ref/c_static.html)
+const transientHandling = new interop.Pointer(-1);
+
 const bind = (params: SqliteParams, statement: interop.Reference<any>) =>
   paramsToStringArray(params).forEach((param, i) => {
     let result;
     if (param === null) {
       result = sqlite3_bind_null(statement, i + 1);
     } else {
-      result = sqlite3_bind_text(statement, i + 1, param, -1, sqlitehelper.getTrans());
+      // 5th argument is a destructor to dispose the string (3rd param).
+      // But docs state: the destructor is not called if the third parameter is a NULL pointer or
+      // the fourth parameter is negative. (https://www.sqlite.org/c3ref/bind_blob.html)
+      result = sqlite3_bind_text(statement, i + 1, param, -1, transientHandling);
     }
     if (result) {
       finalize(statement);
