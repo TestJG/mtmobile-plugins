@@ -21,8 +21,8 @@ const iosProperty = <T extends any>(_self, property: T): T => {
 
 const toCharPtr = (str: string) => {
   const objcStr = NSString.stringWithString(str);
-  const size = strlen(objcStr.UTF8String) + 1;
-  const buffer = interop.alloc(size) as any;
+  const size = str.length * 4 + 1;
+  const buffer = interop.alloc(size);
   objcStr.getCStringMaxLengthEncoding(buffer, size, NSUTF8StringEncoding);
   return buffer;
 };
