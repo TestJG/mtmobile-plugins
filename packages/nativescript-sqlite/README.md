@@ -1,12 +1,30 @@
 # @testjg/nativescript-sqlite
 
+## Installation
+
 ```javascript
 ns plugin add @testjg/nativescript-sqlite
 ```
 
 ## Usage
 
-// TODO
+You should take care of wrapping sqlite calls to your preferred async option (promises, observables, async/await). And catch any exceptions thrown.
+
+```TypeScript
+import { openOrCreate, deleteDatabase } from "@testjg/nativescript-sqlite";
+
+const sqlite = openOrCreate("path/to/db");
+sqlite.execute("CREATE TABLE names (id INT, name TEXT)");
+sqlite.transaction(cancelTransaction => {
+    // Calling cancelTransaction will rollback all changes made to db
+    names.forEach((name, id) =>
+        sqlite.execute(
+            "INSERT INTO names (id, name) VALUES (?, ?)",
+            [id, name]
+        )
+    );
+});
+```
 
 ## License
 
