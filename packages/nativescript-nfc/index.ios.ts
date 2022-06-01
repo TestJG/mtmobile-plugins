@@ -132,7 +132,7 @@ class NFCNDEFReaderSessionDelegateImpl extends NSObject implements NFCNDEFReader
     callback: (message: any) => void,
     options?: NdefListenerOptions
   ): NFCNDEFReaderSessionDelegateImpl {
-    const delegate = <NFCNDEFReaderSessionDelegateImpl>NFCNDEFReaderSessionDelegateImpl.new();
+    const delegate = NFCNDEFReaderSessionDelegateImpl.new();
     delegate._owner = owner;
     delegate.options = options;
     delegate.resultCallback = callback;
@@ -157,10 +157,12 @@ class NFCNDEFReaderSessionDelegateImpl extends NSObject implements NFCNDEFReader
     this.resultCallback(NFCNDEFReaderSessionDelegateImpl.ndefToJson(firstMessage));
   }
 
-  readerSessionDidDetectTags(
-    session: NFCNDEFReaderSession,
-    tags: NSArray<NFCNDEFTag> | NFCNDEFTag[]
-  ): void {}
+  // If not commented iOS does not execute readerSessionDidDetectNDEFs, that's where we notify the
+  // main thread
+  // readerSessionDidDetectTags(
+  //   session: NFCNDEFReaderSession,
+  //   tags: NSArray<NFCNDEFTag> | NFCNDEFTag[]
+  // ): void {}
 
   // Called when the reader session becomes invalid due to the specified error
   readerSessionDidInvalidateWithError(
