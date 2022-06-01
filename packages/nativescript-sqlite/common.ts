@@ -47,5 +47,5 @@ export const paramsToStringArray = (params?: SqliteParams) => {
 };
 
 export const throwError = (msg: string) => {
-  throw new Error(`MtMobileSqlite Error: ${msg}`);
+  throw new Error(msg);
 };

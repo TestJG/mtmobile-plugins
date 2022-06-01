@@ -142,7 +142,7 @@ const open = (filePath: string): DbPtr => {
   const db = new interop.Reference<any>();
   const result = sqlite3_open_v2(toCharPtr(filePath), db, 65542, null);
   if (result) {
-    throwError(`open: ${result}`);
+    throwNormalizedError(result, `open: `);
   }
   return db.value;
 };
@@ -151,7 +151,7 @@ const prepareStatement = (db: DbPtr, query: string) => {
   const statement = new interop.Reference<any>();
   const result = sqlite3_prepare_v2(db, query, -1, statement, null);
   if (result) {
-    throwError(`prepareStatement: ${result}`);
+    throwNormalizedError(result, `prepareStatement: `);
   }
   return statement.value as interop.Reference<any>;
 };
@@ -160,7 +160,7 @@ const step = (statement: interop.Reference<any>) => {
   const result = sqlite3_step(statement);
   if (result && result !== 100 && result !== 101) {
     finalize(statement);
-    throwError(`step: ${result}`);
+    throwNormalizedError(result, `step: `);
   }
   return result;
 };
@@ -175,15 +175,22 @@ const bind = (params: SqliteParams, statement: interop.Reference<any>) =>
     }
     if (result) {
       finalize(statement);
-      throwError(`bind: ${result}`);
+      throwNormalizedError(result, `bind: `);
     }
   });
 
 const finalize = (statement: interop.Reference<any>) => {
   const result = sqlite3_finalize(statement);
   if (result) {
-    throwError(`finalize: ${result}`);
+    throwNormalizedError(result, `finalize: `);
   }
+};
+
+const getErrorMsg = (errorCode: number) => NSString.stringWithCString(sqlite3_errstr(errorCode));
+
+const throwNormalizedError = (errorCode: number, msg?: string) => {
+  const errorMsg = getErrorMsg(errorCode);
+  throwError(`${msg ?? ''}${errorCode} ${errorMsg}`);
 };
 
 const getRaw = (
@@ -261,7 +268,7 @@ const transactionRaw = <T = any>(
     if (isFirstTransaction) {
       execRaw(db, 'ROLLBACK TRANSACTION');
     }
-    throwError(`transaction: ${e}`);
+    throw e;
   }
 };
 
