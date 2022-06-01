@@ -11,6 +11,9 @@ export class HomeComponent {
 	},
 	{
 		name: 'nativescript-nfc'
+	},
+	{
+		name: 'nativescript-sqlite'
 	}
 ];
 }

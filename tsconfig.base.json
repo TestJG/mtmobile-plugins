@@ -37,6 +37,9 @@
       ],
       "@testjg/nativescript-nfc/angular": [
         "packages/nativescript-nfc/angular/index.ts"
+      ],
+      "@testjg/nativescript-sqlite": [
+        "packages/nativescript-sqlite/index.d.ts"
       ]
     }
   },

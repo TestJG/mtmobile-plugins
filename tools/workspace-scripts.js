@@ -77,6 +77,13 @@ module.exports = {
 					description: '@testjg/nativescript-nfc: Build',
 				},
 			},
+			// @testjg/nativescript-sqlite
+			'nativescript-sqlite': {
+				build: {
+					script: 'nx run nativescript-sqlite:build.all',
+					description: '@testjg/nativescript-sqlite: Build',
+				},
+			},
 			'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
@@ -94,6 +101,10 @@ module.exports = {
       'nativescript-nfc': {
 				script: 'nx run nativescript-nfc:focus',
 				description: 'Focus on @testjg/nativescript-nfc',
+			},
+			'nativescript-sqlite': {
+				script: 'nx run nativescript-sqlite:focus',
+				description: 'Focus on @testjg/nativescript-sqlite',
 			},
 			reset: {
         script: 'nx g @testjg/plugin-tools:focus-packages',

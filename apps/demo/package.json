@@ -6,7 +6,8 @@
   "dependencies": {
     "@nativescript/core": "file:../../node_modules/@nativescript/core",
     "@testjg/nativescript-guid": "file:../../packages/nativescript-guid",
-    "@testjg/nativescript-nfc": "file:../../packages/nativescript-nfc"
+    "@testjg/nativescript-nfc": "file:../../packages/nativescript-nfc",
+    "@testjg/nativescript-sqlite": "file:../../packages/nativescript-sqlite"
   },
   "devDependencies": {
     "@nativescript/android": "~8.2.0",

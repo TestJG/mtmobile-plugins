@@ -1,5 +1,6 @@
 - [@testjg/nativescript-guid](packages/nativescript-guid/README.md)
 - [@testjg/nativescript-nfc](packages/nativescript-nfc/README.md)
+- [@testjg/nativescript-sqlite](packages/nativescript-sqlite/README.md)
 
 # How to use?
 
