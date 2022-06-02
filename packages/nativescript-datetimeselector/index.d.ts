@@ -1,3 +1,7 @@
-import { NativescriptDatetimeselectorCommon } from './common';
+import { DateSelectorOptions, DateTimeSelectorOptions, TimeSelectorOptions } from './common';
 
-export declare class NativescriptDatetimeselector extends NativescriptDatetimeselectorCommon {}
+export declare const showDateSelector: (opts: DateSelectorOptions) => Promise<Date>;
+
+export declare const showTimeSelector: (opts: TimeSelectorOptions) => Promise<number>;
+
+export declare const showDateTimeSelector: (opts: DateTimeSelectorOptions) => Promise<Date>;
