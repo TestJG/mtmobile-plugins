@@ -1,50 +1,55 @@
 import { DemoSharedBase } from '../utils';
-import { openOrCreate, deleteDatabase, SQLiteDatabase } from '@testjg/nativescript-sqlite';
+import type { SQLiteDatabase } from '@testjg/nativescript-sqlite';
 import { knownFolders } from '@nativescript/core';
-
-type DataExample = { id: number; name: string };
+import {
+  deleteRows,
+  insertCorruptedTransaction,
+  insertTransaction,
+  nestedTransaction,
+  resetDb,
+  selectLimit,
+  simpleInsert,
+} from './db.utils';
+import { MessageData } from './worker-types';
 
 export class DemoSharedNativescriptSqlite extends DemoSharedBase {
   public message: string;
+  public sendToWorker = false;
   private sqlite: SQLiteDatabase;
+  private numOfRows = 10000;
+  private worker = new Worker('./dbworker');
 
   constructor() {
     super();
-    this.resetDb();
-    this.sqlite.setVersion(1);
-    this.message = `version = ${this.sqlite.getVersion()}`;
-  }
-
-  resetDb() {
     const dbName = 'data.db';
     const path = `${knownFolders.temp().path}/${dbName}`;
-    deleteDatabase(path);
-    this.sqlite = openOrCreate(path);
-    const createCmd = 'CREATE TABLE names (id INT, name TEXT, json TEXT, PRIMARY KEY (id))';
-    this.sqlite.execute(createCmd);
+    this.sqlite = resetDb(path);
+    this.sqlite.setVersion(1);
+    this.message = `version = ${this.sqlite.getVersion()}`;
+    this.worker.onmessage = (msg) => {
+      console.log('FROM WORKER:', msg.data);
+    };
   }
 
-  insert(size: number) {
-    for (const data of createDataGenerator(size)) {
-      const insert = `INSERT INTO names (id, name, json) VALUES (?, ?, ?)`;
-      this.sqlite.execute(insert, [data.id, data.name, JSON.stringify(data)]);
-    }
+  private postToWorker(msg: MessageData) {
+    this.worker.postMessage(msg);
   }
 
-  insertCorrupted(size: number) {
-    for (const data of createDataGenerator(size)) {
-      const insert = `INSERT INTO names (id, name, json) VALUES (?, ?, ?)`;
-      if (data.id === 1000) {
-        console.log('About to crash!');
-        data.id = 0;
-      }
-      this.sqlite.execute(insert, [data.id, data.name, JSON.stringify(data)]);
+  private toWorkerOrAction(msgAction: { msg: MessageData; action: () => void }) {
+    if (this.sendToWorker) {
+      this.postToWorker(msgAction.msg);
+      return;
     }
+
+    msgAction.action();
   }
 
   onInsert() {
     try {
-      this.insert(10000);
+      this.toWorkerOrAction({
+        msg: { type: 'insert-simple', payload: this.numOfRows },
+        action: () => simpleInsert(this.sqlite, this.numOfRows),
+      });
     } catch (error) {
       console.log('Error onInsert:', error);
     }
@@ -52,7 +57,10 @@ export class DemoSharedNativescriptSqlite extends DemoSharedBase {
 
   onInsertWithTrans() {
     try {
-      this.sqlite.transaction(() => this.insert(10000));
+      this.toWorkerOrAction({
+        msg: { type: 'insert-transaction', payload: this.numOfRows },
+        action: () => insertTransaction(this.sqlite, this.numOfRows),
+      });
     } catch (error) {
       console.log('Error onInsertWithTrans:', error);
     }
@@ -60,41 +68,40 @@ export class DemoSharedNativescriptSqlite extends DemoSharedBase {
 
   onInsertWithRollback() {
     try {
-      this.sqlite.transaction(() => this.insertCorrupted(10000));
+      this.toWorkerOrAction({
+        msg: { type: 'insert-corrupted-transaction', payload: this.numOfRows },
+        action: () => insertCorruptedTransaction(this.sqlite, this.numOfRows),
+      });
     } catch (error) {
       console.log('Error inserting so rollback', error);
     }
   }
 
   onSelect() {
-    const select = 'SELECT * FROM names WHERE id < 20';
-    const data = this.sqlite.select(select);
-    console.log(`Selected #${data.length} data items`);
-    console.log(data);
+    this.toWorkerOrAction({
+      msg: { type: 'select', payload: 20 },
+      action: () => {
+        const data = selectLimit(this.sqlite, 20);
+        console.log(`Selected #${data.length} data items`);
+        console.log(data);
+      },
+    });
   }
 
   onReset() {
-    const reset = 'DELETE FROM names';
-    this.sqlite.execute(reset);
+    this.toWorkerOrAction({
+      msg: { type: 'delete-rows', payload: null },
+      action: () => deleteRows(this.sqlite),
+    });
+  }
+
+  onNestedTransaction() {
+    this.toWorkerOrAction({
+      msg: { type: 'nested-transaction', payload: null },
+      action: () => {
+        const count = nestedTransaction(this.sqlite);
+        console.log('nested transaction', count);
+      },
+    });
   }
 }
-
-const createDataExample = (id: number): DataExample => ({
-  id,
-  name: `${Math.random() + id} Test data`,
-});
-
-const createDataGenerator = (size: number): Iterable<DataExample> => {
-  return {
-    [Symbol.iterator]: () => {
-      let i = 0;
-      return {
-        next: () => {
-          if (i === size) return { done: true, value: undefined };
-          const data = createDataExample(i++);
-          return { done: false, value: data };
-        },
-      };
-    },
-  };
-};
