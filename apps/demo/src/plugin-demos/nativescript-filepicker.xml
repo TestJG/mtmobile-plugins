@@ -6,8 +6,8 @@
     <StackLayout class="p-20">
         <ScrollView class="h-full">
           <StackLayout>
-            <Button text="Test nativescript-filepicker" tap="{{ testIt }}" class="btn btn-primary"/>
-
+            <Button text="Show Filepicker" tap="{{ showPicker }}" class="btn btn-primary"/>
+            <Button text="Show Filepicker with options" tap="{{ showPickerWithOptions }}" class="btn btn-primary"/>
           </StackLayout>
         </ScrollView>
     </StackLayout>

@@ -3,8 +3,13 @@
   <ScrollView class="h-full">
     <StackLayout>
       <Button
-        text="Test nativescript-filepicker"
-        (tap)="demoShared.testIt()"
+        text="Show Filepicker"
+        (tap)="demoShared.showPicker()"
+        class="btn btn-primary"
+      ></Button>
+      <Button
+        text="Show Filepicker with options"
+        (tap)="demoShared.showPickerWithOptions()"
         class="btn btn-primary"
       ></Button>
     </StackLayout>

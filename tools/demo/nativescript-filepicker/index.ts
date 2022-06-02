@@ -1,8 +1,12 @@
 import { DemoSharedBase } from '../utils';
-import {} from '@testjg/nativescript-filepicker';
+import { showFilePicker } from '@testjg/nativescript-filepicker';
 
 export class DemoSharedNativescriptFilepicker extends DemoSharedBase {
-  testIt() {
-    console.log('test nativescript-filepicker!');
+  async showPicker() {
+    await this.safeAction(showFilePicker, true);
+  }
+
+  async showPickerWithOptions() {
+    await this.safeAction(() => showFilePicker({ chooserTitle: 'This is my custom title' }), true);
   }
 }
