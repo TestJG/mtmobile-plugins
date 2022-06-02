@@ -5,6 +5,7 @@
     "demo-angular": "apps/demo-angular",
     "nativescript-guid": "packages/nativescript-guid",
     "nativescript-nfc": "packages/nativescript-nfc",
-    "nativescript-sqlite": "packages/nativescript-sqlite"
+    "nativescript-sqlite": "packages/nativescript-sqlite",
+    "nativescript-filepicker": "packages/nativescript-filepicker"
   }
 }

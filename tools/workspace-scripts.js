@@ -71,20 +71,27 @@ module.exports = {
         },
       },
       // @testjg/nativescript-nfc
-			'nativescript-nfc': {
-				build: {
-					script: 'nx run nativescript-nfc:build.all',
-					description: '@testjg/nativescript-nfc: Build',
-				},
-			},
-			// @testjg/nativescript-sqlite
-			'nativescript-sqlite': {
-				build: {
-					script: 'nx run nativescript-sqlite:build.all',
-					description: '@testjg/nativescript-sqlite: Build',
-				},
-			},
-			'build-all': {
+      'nativescript-nfc': {
+        build: {
+          script: 'nx run nativescript-nfc:build.all',
+          description: '@testjg/nativescript-nfc: Build',
+        },
+      },
+      // @testjg/nativescript-sqlite
+      'nativescript-sqlite': {
+        build: {
+          script: 'nx run nativescript-sqlite:build.all',
+          description: '@testjg/nativescript-sqlite: Build',
+        },
+      },
+      // @testjg/nativescript-filepicker
+      'nativescript-filepicker': {
+        build: {
+          script: 'nx run nativescript-filepicker:build.all',
+          description: '@testjg/nativescript-filepicker: Build',
+        },
+      },
+      'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
       },
@@ -99,14 +106,18 @@ module.exports = {
         description: 'Focus on @testjg/nativescript-guid',
       },
       'nativescript-nfc': {
-				script: 'nx run nativescript-nfc:focus',
-				description: 'Focus on @testjg/nativescript-nfc',
-			},
-			'nativescript-sqlite': {
-				script: 'nx run nativescript-sqlite:focus',
-				description: 'Focus on @testjg/nativescript-sqlite',
-			},
-			reset: {
+        script: 'nx run nativescript-nfc:focus',
+        description: 'Focus on @testjg/nativescript-nfc',
+      },
+      'nativescript-sqlite': {
+        script: 'nx run nativescript-sqlite:focus',
+        description: 'Focus on @testjg/nativescript-sqlite',
+      },
+      'nativescript-filepicker': {
+        script: 'nx run nativescript-filepicker:focus',
+        description: 'Focus on @testjg/nativescript-filepicker',
+      },
+      reset: {
         script: 'nx g @testjg/plugin-tools:focus-packages',
         description: 'Reset Focus',
       },

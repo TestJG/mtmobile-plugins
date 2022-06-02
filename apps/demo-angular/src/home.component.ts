@@ -6,14 +6,17 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   demos = [
-	{
-		name: 'nativescript-guid'
-	},
-	{
-		name: 'nativescript-nfc'
-	},
-	{
-		name: 'nativescript-sqlite'
-	}
-];
+    {
+      name: 'nativescript-filepicker',
+    },
+    {
+      name: 'nativescript-guid',
+    },
+    {
+      name: 'nativescript-nfc',
+    },
+    {
+      name: 'nativescript-sqlite',
+    },
+  ];
 }

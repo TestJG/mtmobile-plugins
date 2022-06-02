@@ -4,7 +4,8 @@
     "@nativescript/core": "file:../../node_modules/@nativescript/core",
     "@testjg/nativescript-guid": "file:../../dist/packages/nativescript-guid",
     "@testjg/nativescript-nfc": "file:../../dist/packages/nativescript-nfc",
-    "@testjg/nativescript-sqlite": "file:../../dist/packages/nativescript-sqlite"
+    "@testjg/nativescript-sqlite": "file:../../dist/packages/nativescript-sqlite",
+    "@testjg/nativescript-filepicker": "file:../../dist/packages/nativescript-filepicker"
   },
   "devDependencies": {
     "@nativescript/android": "~8.2.0",
