@@ -310,8 +310,11 @@ export const openOrCreate = (filePath: string): SQLiteDatabase => {
     let res;
     if (!_isInTransaction) {
       _isInTransaction = true;
-      res = transactionRaw(db, action, true);
-      _isInTransaction = false;
+      try {
+        res = transactionRaw(db, action, true);
+      } finally {
+        _isInTransaction = false;
+      }
     } else {
       res = transactionRaw(db, action, false);
     }
