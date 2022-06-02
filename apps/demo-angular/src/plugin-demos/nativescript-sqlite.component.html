@@ -2,7 +2,42 @@
 <StackLayout class="p-20">
   <ScrollView class="h-full">
     <StackLayout>
-      <Button text="Test nativescript-sqlite" (tap)="demoShared.testIt()" class="btn btn-primary"></Button>
+      <Label
+        text="You should run db calls in a worker as ui thread will freeze"
+        class="t-20 text-center"
+        textWrap="true"
+      ></Label>
+      <ActivityIndicator busy="true" verticalAlignment="center" class="m-20"></ActivityIndicator>
+      <Button
+        [text]="demoShared.sendToWorker ? 'On Worker Thread' : 'On Main Thread'"
+        (tap)="demoShared.sendToWorker = !demoShared.sendToWorker"
+      ></Button>
+      <Button
+        text="Insert Data! (slow)"
+        (tap)="demoShared.onInsert()"
+        class="btn btn-primary m-20"
+      ></Button>
+      <Button
+        text="Insert Data! (with transaction, fast)"
+        (tap)="demoShared.onInsertWithTrans()"
+        class="btn btn-primary m-20"
+      ></Button>
+      <Button
+        text="Insert Corrupted Data! (with transaction so rollback)"
+        (tap)="demoShared.onInsertWithRollback()"
+        class="btn btn-primary m-20"
+      ></Button>
+      <Button
+        text="Select Data!"
+        (tap)="demoShared.onSelect()"
+        class="btn btn-primary m-20"
+      ></Button>
+      <Button
+        text="Nested transaction!"
+        (tap)="demoShared.onNestedTransaction()"
+        class="btn btn-primary m-20"
+      ></Button>
+      <Button text="Reset Data!" (tap)="demoShared.onReset()" class="btn btn-primary m-20"></Button>
     </StackLayout>
   </ScrollView>
 </StackLayout>
