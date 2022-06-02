@@ -1,5 +1,5 @@
 import { FilePickerResult, ShowFilePickerOptions } from './common';
 
 export declare const showFilePicker: (
-  options: ShowFilePickerOptions
+  options?: ShowFilePickerOptions
 ) => Promise<FilePickerResult | null>;

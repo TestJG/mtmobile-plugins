@@ -1,7 +1,8 @@
 import { Utils } from '@nativescript/core';
-import { FilePickerResult } from './common';
+import { FilePickerResult, parseOptions, ShowFilePickerOptions } from './common';
 
-export const showFilePicker = () => {
+export const showFilePicker = (options?: ShowFilePickerOptions) => {
+  options = parseOptions(options);
   const documentTypes = Utils.ios.collections.jsArrayToNSArray(['public.data']);
   const controller = UIDocumentPickerViewController.alloc().initWithDocumentTypesInMode(
     documentTypes,

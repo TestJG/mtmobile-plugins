@@ -6,5 +6,14 @@ export interface FilePickerResult {
 
 export interface ShowFilePickerOptions {
   // Only for Android
-  chooserTitle?: string;
+  chooserTitle: string;
 }
+
+const defaultOptions: ShowFilePickerOptions = {
+  chooserTitle: '',
+};
+
+export const parseOptions = (options?: ShowFilePickerOptions) => {
+  if (!options) return defaultOptions;
+  return options;
+};

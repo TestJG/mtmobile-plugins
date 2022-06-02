@@ -1,4 +1,4 @@
-import { FilePickerResult, ShowFilePickerOptions } from './common';
+import { FilePickerResult, parseOptions, ShowFilePickerOptions } from './common';
 import {
   knownFolders,
   File,
@@ -9,9 +9,10 @@ import {
 
 const REQUEST_CODE = 1970;
 
-export const showFilePicker = (options: ShowFilePickerOptions): Promise<FilePickerResult> =>
+export const showFilePicker = (options?: ShowFilePickerOptions): Promise<FilePickerResult> =>
   new Promise((resolve, reject) => {
     try {
+      options = parseOptions(options);
       const intent = new android.content.Intent();
       // intent.setAction("android.intent.action.OPEN_DOCUMENT");
       intent.setAction(android.content.Intent.ACTION_GET_CONTENT);
