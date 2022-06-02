@@ -8,7 +8,8 @@
     "@testjg/nativescript-guid": "file:../../packages/nativescript-guid",
     "@testjg/nativescript-nfc": "file:../../packages/nativescript-nfc",
     "@testjg/nativescript-sqlite": "file:../../packages/nativescript-sqlite",
-    "@testjg/nativescript-filepicker": "file:../../packages/nativescript-filepicker"
+    "@testjg/nativescript-filepicker": "file:../../packages/nativescript-filepicker",
+    "@testjg/nativescript-datetimeselector": "file:../../packages/nativescript-datetimeselector"
   },
   "devDependencies": {
     "@nativescript/android": "~8.2.0",

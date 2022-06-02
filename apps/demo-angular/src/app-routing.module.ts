@@ -8,6 +8,13 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   {
+    path: 'nativescript-datetimeselector',
+    loadChildren: () =>
+      import('./plugin-demos/nativescript-datetimeselector.module').then(
+        (m) => m.NativescriptDatetimeselectorModule
+      ),
+  },
+  {
     path: 'nativescript-filepicker',
     loadChildren: () =>
       import('./plugin-demos/nativescript-filepicker.module').then(

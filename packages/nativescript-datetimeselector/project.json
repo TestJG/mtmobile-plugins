@@ -1,0 +1,66 @@
+{
+  "root": "packages/nativescript-datetimeselector",
+  "projectType": "library",
+  "sourceRoot": "packages/nativescript-datetimeselector",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "outputPath": "dist/packages/nativescript-datetimeselector",
+        "tsConfig": "packages/nativescript-datetimeselector/tsconfig.json",
+        "packageJson": "packages/nativescript-datetimeselector/package.json",
+        "main": "packages/nativescript-datetimeselector/index.d.ts",
+        "assets": [
+          "packages/nativescript-datetimeselector/*.md",
+          "packages/nativescript-datetimeselector/index.d.ts",
+          "LICENSE",
+          {
+            "glob": "**/*",
+            "input": "packages/nativescript-datetimeselector/platforms/",
+            "output": "./platforms/"
+          }
+        ],
+        "dependsOn": [
+          {
+            "target": "build.all",
+            "projects": "dependencies"
+          }
+        ]
+      }
+    },
+    "build.all": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["node tools/scripts/build-finish.ts nativescript-datetimeselector"],
+        "parallel": false
+      },
+      "outputs": ["dist/packages/nativescript-datetimeselector"],
+      "dependsOn": [
+        {
+          "target": "build.all",
+          "projects": "dependencies"
+        },
+        {
+          "target": "build",
+          "projects": "self"
+        }
+      ]
+    },
+    "focus": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "nx g @nativescript/plugin-tools:focus-packages nativescript-datetimeselector"
+        ],
+        "parallel": false
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/nativescript-datetimeselector/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

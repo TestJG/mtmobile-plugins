@@ -6,6 +6,7 @@
     "nativescript-guid": "packages/nativescript-guid",
     "nativescript-nfc": "packages/nativescript-nfc",
     "nativescript-sqlite": "packages/nativescript-sqlite",
-    "nativescript-filepicker": "packages/nativescript-filepicker"
+    "nativescript-filepicker": "packages/nativescript-filepicker",
+    "nativescript-datetimeselector": "packages/nativescript-datetimeselector"
   }
 }

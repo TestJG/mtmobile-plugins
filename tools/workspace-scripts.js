@@ -91,6 +91,13 @@ module.exports = {
           description: '@testjg/nativescript-filepicker: Build',
         },
       },
+      // @testjg/nativescript-datetimeselector
+      'nativescript-datetimeselector': {
+        build: {
+          script: 'nx run nativescript-datetimeselector:build.all',
+          description: '@testjg/nativescript-datetimeselector: Build',
+        },
+      },
       'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
@@ -116,6 +123,10 @@ module.exports = {
       'nativescript-filepicker': {
         script: 'nx run nativescript-filepicker:focus',
         description: 'Focus on @testjg/nativescript-filepicker',
+      },
+      'nativescript-datetimeselector': {
+        script: 'nx run nativescript-datetimeselector:focus',
+        description: 'Focus on @testjg/nativescript-datetimeselector',
       },
       reset: {
         script: 'nx g @testjg/plugin-tools:focus-packages',
