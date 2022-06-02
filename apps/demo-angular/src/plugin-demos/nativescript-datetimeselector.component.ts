@@ -1,6 +1,5 @@
 import { Component, NgZone } from '@angular/core';
 import { DemoSharedNativescriptDatetimeselector } from '@demo/shared';
-import {} from '@testjg/nativescript-datetimeselector';
 
 @Component({
   selector: 'demo-nativescript-datetimeselector',

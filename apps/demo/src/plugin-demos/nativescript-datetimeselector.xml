@@ -6,8 +6,9 @@
     <StackLayout class="p-20">
         <ScrollView class="h-full">
           <StackLayout>
-            <Button text="Test nativescript-datetimeselector" tap="{{ testIt }}" class="btn btn-primary"/>
-
+            <Button text="Show Date Selector" tap="{{ showDateSelector }}" class="btn btn-primary"/>
+            <Button text="Show DateTime Selector" tap="{{ showDateTimeSelector }}" class="btn btn-primary"/>
+            <Button text="Show Time Selector" tap="{{ showTimeSelector }}" class="btn btn-primary"/>
           </StackLayout>
         </ScrollView>
     </StackLayout>

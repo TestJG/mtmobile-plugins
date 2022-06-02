@@ -3,8 +3,18 @@
   <ScrollView class="h-full">
     <StackLayout>
       <Button
-        text="Test nativescript-datetimeselector"
-        (tap)="demoShared.testIt()"
+        text="Show Date Selector"
+        (tap)="demoShared.showDateSelector()"
+        class="btn btn-primary"
+      ></Button>
+      <Button
+        text="Show DateTime Selector"
+        (tap)="demoShared.showDateTimeSelector()"
+        class="btn btn-primary"
+      ></Button>
+      <Button
+        text="Show Time Selector"
+        (tap)="demoShared.showTimeSelector()"
         class="btn btn-primary"
       ></Button>
     </StackLayout>
