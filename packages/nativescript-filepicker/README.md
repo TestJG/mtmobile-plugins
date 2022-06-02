@@ -1,12 +1,20 @@
 # @testjg/nativescript-filepicker
 
+## Installation
+
 ```javascript
 ns plugin add @testjg/nativescript-filepicker
 ```
 
 ## Usage
 
-// TODO
+You should ask for permissions first. And wrap it in your preferred async option.
+
+```typescript
+// `result` can be null.
+const result = await showFilePicker({ chooserTitle: 'Pick a File!' });
+```
+
 
 ## License
 
