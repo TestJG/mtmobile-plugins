@@ -3,3 +3,8 @@ export interface FilePickerResult {
   name: string;
   mime?: string;
 }
+
+export interface ShowFilePickerOptions {
+  // Only for Android
+  chooserTitle?: string;
+}

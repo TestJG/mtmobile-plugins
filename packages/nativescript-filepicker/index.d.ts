@@ -1,3 +1,5 @@
-import { FilePickerResult } from './common';
+import { FilePickerResult, ShowFilePickerOptions } from './common';
 
-export declare const showFilePicker: () => Promise<FilePickerResult>;
+export declare const showFilePicker: (
+  options: ShowFilePickerOptions
+) => Promise<FilePickerResult | null>;
