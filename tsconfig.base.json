@@ -27,7 +27,10 @@
       "@testjg/nativescript-nfc/angular": ["packages/nativescript-nfc/angular/index.ts"],
       "@testjg/nativescript-sqlite": ["packages/nativescript-sqlite/index.d.ts"],
       "@testjg/nativescript-filepicker": ["packages/nativescript-filepicker/index.d.ts"],
-      "@testjg/nativescript-datetimeselector": ["packages/nativescript-datetimeselector/index.d.ts"]
+      "@testjg/nativescript-datetimeselector": [
+        "packages/nativescript-datetimeselector/index.d.ts"
+      ],
+      "@testjg/nativescript-http": ["packages/nativescript-http/index.d.ts"]
     }
   },
   "angularCompilerOptions": {

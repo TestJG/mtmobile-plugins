@@ -1,6 +1,7 @@
 - [@testjg/nativescript-datetimeselector](packages/nativescript-datetimeselector/README.md)
 - [@testjg/nativescript-filepicker](packages/nativescript-filepicker/README.md)
 - [@testjg/nativescript-guid](packages/nativescript-guid/README.md)
+- [@testjg/nativescript-http](packages/nativescript-http/README.md)
 - [@testjg/nativescript-nfc](packages/nativescript-nfc/README.md)
 - [@testjg/nativescript-sqlite](packages/nativescript-sqlite/README.md)
 

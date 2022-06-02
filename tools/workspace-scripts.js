@@ -98,6 +98,13 @@ module.exports = {
           description: '@testjg/nativescript-datetimeselector: Build',
         },
       },
+      // @testjg/nativescript-http
+      'nativescript-http': {
+        build: {
+          script: 'nx run nativescript-http:build.all',
+          description: '@testjg/nativescript-http: Build',
+        },
+      },
       'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
@@ -127,6 +134,10 @@ module.exports = {
       'nativescript-datetimeselector': {
         script: 'nx run nativescript-datetimeselector:focus',
         description: 'Focus on @testjg/nativescript-datetimeselector',
+      },
+      'nativescript-http': {
+        script: 'nx run nativescript-http:focus',
+        description: 'Focus on @testjg/nativescript-http',
       },
       reset: {
         script: 'nx g @testjg/plugin-tools:focus-packages',

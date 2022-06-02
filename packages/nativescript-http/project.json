@@ -1,0 +1,64 @@
+{
+  "root": "packages/nativescript-http",
+  "projectType": "library",
+  "sourceRoot": "packages/nativescript-http",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "outputPath": "dist/packages/nativescript-http",
+        "tsConfig": "packages/nativescript-http/tsconfig.json",
+        "packageJson": "packages/nativescript-http/package.json",
+        "main": "packages/nativescript-http/index.d.ts",
+        "assets": [
+          "packages/nativescript-http/*.md",
+          "packages/nativescript-http/index.d.ts",
+          "LICENSE",
+          {
+            "glob": "**/*",
+            "input": "packages/nativescript-http/platforms/",
+            "output": "./platforms/"
+          }
+        ],
+        "dependsOn": [
+          {
+            "target": "build.all",
+            "projects": "dependencies"
+          }
+        ]
+      }
+    },
+    "build.all": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["node tools/scripts/build-finish.ts nativescript-http"],
+        "parallel": false
+      },
+      "outputs": ["dist/packages/nativescript-http"],
+      "dependsOn": [
+        {
+          "target": "build.all",
+          "projects": "dependencies"
+        },
+        {
+          "target": "build",
+          "projects": "self"
+        }
+      ]
+    },
+    "focus": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["nx g @nativescript/plugin-tools:focus-packages nativescript-http"],
+        "parallel": false
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/nativescript-http/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

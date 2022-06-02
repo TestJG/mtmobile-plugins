@@ -16,6 +16,9 @@ export class HomeComponent {
       name: 'nativescript-guid',
     },
     {
+      name: 'nativescript-http',
+    },
+    {
       name: 'nativescript-nfc',
     },
     {

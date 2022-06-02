@@ -27,6 +27,11 @@ const routes: Routes = [
       import('./plugin-demos/nativescript-guid.module').then((m) => m.NativescriptGuidModule),
   },
   {
+    path: 'nativescript-http',
+    loadChildren: () =>
+      import('./plugin-demos/nativescript-http.module').then((m) => m.NativescriptHttpModule),
+  },
+  {
     path: 'nativescript-nfc',
     loadChildren: () =>
       import('./plugin-demos/nativescript-nfc.module').then((m) => m.NativescriptNfcModule),

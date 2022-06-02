@@ -7,6 +7,7 @@
     "nativescript-nfc": "packages/nativescript-nfc",
     "nativescript-sqlite": "packages/nativescript-sqlite",
     "nativescript-filepicker": "packages/nativescript-filepicker",
-    "nativescript-datetimeselector": "packages/nativescript-datetimeselector"
+    "nativescript-datetimeselector": "packages/nativescript-datetimeselector",
+    "nativescript-http": "packages/nativescript-http"
   }
 }
