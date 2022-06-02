@@ -12,7 +12,7 @@ You should ask for permissions first. And wrap it in your preferred async option
 
 ```typescript
 // `result` can be null.
-const result = await showFilePicker({ chooserTitle: 'Pick a File!' });
+const result = await showFilePicker();
 ```
 
 
