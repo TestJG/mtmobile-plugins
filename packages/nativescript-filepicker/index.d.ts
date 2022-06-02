@@ -1,3 +1,3 @@
-import { NativescriptFilepickerCommon } from './common';
+import { FilePickerResult } from './common';
 
-export declare class NativescriptFilepicker extends NativescriptFilepickerCommon {}
+export declare const showFilePicker: () => Promise<FilePickerResult>;

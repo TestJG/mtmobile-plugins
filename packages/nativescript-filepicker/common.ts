@@ -1,3 +1,5 @@
-import { Observable } from '@nativescript/core';
-
-export class NativescriptFilepickerCommon extends Observable {}
+export interface FilePickerResult {
+  path: string;
+  name: string;
+  mime?: string;
+}
