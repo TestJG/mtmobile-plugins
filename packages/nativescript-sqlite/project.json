@@ -31,14 +31,10 @@
     "build.all": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": [
-          "node tools/scripts/build-finish.ts nativescript-sqlite"
-        ],
+        "commands": ["node tools/scripts/build-finish.ts nativescript-sqlite"],
         "parallel": false
       },
-      "outputs": [
-        "dist/packages/nativescript-sqlite"
-      ],
+      "outputs": ["dist/packages/nativescript-sqlite"],
       "dependsOn": [
         {
           "target": "build.all",
@@ -53,18 +49,14 @@
     "focus": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": [
-          "nx g @nativescript/plugin-tools:focus-packages nativescript-sqlite"
-        ],
+        "commands": ["nx g @nativescript/plugin-tools:focus-packages nativescript-sqlite"],
         "parallel": false
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "packages/nativescript-sqlite/**/*.ts"
-        ]
+        "lintFilePatterns": ["packages/nativescript-sqlite/**/*.ts"]
       }
     }
   },

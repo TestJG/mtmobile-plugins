@@ -31,14 +31,10 @@
     "build.all": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": [
-          "node tools/scripts/build-finish.ts nativescript-nfc"
-        ],
+        "commands": ["node tools/scripts/build-finish.ts nativescript-nfc"],
         "parallel": false
       },
-      "outputs": [
-        "dist/packages/nativescript-nfc"
-      ],
+      "outputs": ["dist/packages/nativescript-nfc"],
       "dependsOn": [
         {
           "target": "build.all",
@@ -53,18 +49,14 @@
     "focus": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": [
-          "nx g @nativescript/plugin-tools:focus-packages nativescript-nfc"
-        ],
+        "commands": ["nx g @nativescript/plugin-tools:focus-packages nativescript-nfc"],
         "parallel": false
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "packages/nativescript-nfc/**/*.ts"
-        ]
+        "lintFilePatterns": ["packages/nativescript-nfc/**/*.ts"]
       }
     }
   },

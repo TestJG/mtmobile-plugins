@@ -11,7 +11,7 @@ ns plugin add @testjg/nativescript-guid
 ## Usage
 
 ```javascript
-import { createGuid } from "@testjg/nativescript-guid"
+import { createGuid } from '@testjg/nativescript-guid';
 
 const guid = createGuid();
 

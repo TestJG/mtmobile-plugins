@@ -11,6 +11,7 @@ ns plugin add @testjg/nativescript-nfc
 ## Usage
 
 Make sure your AndroidManifest.xml includes the permission:
+
 ```xml
 <uses-permission android:name="android.permission.NFC"/>
 ```

@@ -15,7 +15,6 @@ You should ask for permissions first. And wrap it in your preferred async option
 const result = await showFilePicker();
 ```
 
-
 ## License
 
 Apache License Version 2.0

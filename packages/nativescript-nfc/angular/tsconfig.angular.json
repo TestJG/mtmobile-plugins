@@ -7,7 +7,7 @@
       "@testjg/nativescript-nfc": ["../../../dist/packages/nativescript-nfc"]
     },
     "outDir": "../../../dist/out-tsc",
-		"declarationDir": "../../../dist/out-tsc",
+    "declarationDir": "../../../dist/out-tsc"
   },
   "files": ["index.ts"]
 }

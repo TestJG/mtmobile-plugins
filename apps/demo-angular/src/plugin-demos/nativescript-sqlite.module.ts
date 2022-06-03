@@ -3,8 +3,11 @@ import { NativeScriptCommonModule, NativeScriptRouterModule } from '@nativescrip
 import { NativescriptSqliteComponent } from './nativescript-sqlite.component';
 
 @NgModule({
-	imports: [NativeScriptCommonModule, NativeScriptRouterModule.forChild([{ path: '', component: NativescriptSqliteComponent }])],
+  imports: [
+    NativeScriptCommonModule,
+    NativeScriptRouterModule.forChild([{ path: '', component: NativescriptSqliteComponent }]),
+  ],
   declarations: [NativescriptSqliteComponent],
-  schemas: [ NO_ERRORS_SCHEMA]
+  schemas: [NO_ERRORS_SCHEMA],
 })
 export class NativescriptSqliteModule {}

@@ -35,7 +35,10 @@ function buildAngular() {
 
 // copy angular ng-packagr output to dist/packages/{name}
 function copyAngularDist() {
-  fs.copy(path.join('packages', packageName, 'angular', 'dist'), path.join('dist', 'packages', packageName, 'angular'))
+  fs.copy(
+    path.join('packages', packageName, 'angular', 'dist'),
+    path.join('dist', 'packages', packageName, 'angular')
+  )
     .then(() => {
       console.log(`${npmPackageName} angular built successfully.`);
       // buildNativeSrc();

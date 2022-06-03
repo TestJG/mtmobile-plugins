@@ -10,13 +10,13 @@ ns plugin add @testjg/nativescript-datetimeselector
 
 ```typescript
 // Return Date with hours, minutes and seconds set to zero
-const date = await showDateSelector({ okText: 'ok', cancelText: 'cancel' })
+const date = await showDateSelector({ okText: 'ok', cancelText: 'cancel' });
 
 // Returns Date
-const dateTime = await showDateTimeSelector({ okText: 'ok', cancelText: 'cancel' })
+const dateTime = await showDateTimeSelector({ okText: 'ok', cancelText: 'cancel' });
 
 // Returns number of seconds
-const time = await showTimeSelector({ okText: 'ok', cancelText: 'cancel' })
+const time = await showTimeSelector({ okText: 'ok', cancelText: 'cancel' });
 ```
 
 ## License

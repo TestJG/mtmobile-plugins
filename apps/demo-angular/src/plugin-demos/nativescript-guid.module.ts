@@ -3,7 +3,10 @@ import { NativeScriptCommonModule, NativeScriptRouterModule } from '@nativescrip
 import { NativescriptGuidComponent } from './nativescript-guid.component';
 
 @NgModule({
-  imports: [NativeScriptCommonModule, NativeScriptRouterModule.forChild([{ path: '', component: NativescriptGuidComponent }])],
+  imports: [
+    NativeScriptCommonModule,
+    NativeScriptRouterModule.forChild([{ path: '', component: NativescriptGuidComponent }]),
+  ],
   declarations: [NativescriptGuidComponent],
   schemas: [NO_ERRORS_SCHEMA],
 })
