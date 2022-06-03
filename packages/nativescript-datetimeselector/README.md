@@ -1,5 +1,7 @@
 # @testjg/nativescript-datetimeselector
 
+[![npm version](https://badge.fury.io/js/@testjg%2Fnativescript-datetimeselector.svg)](https://badge.fury.io/js/@testjg%2Fnativescript-datetimeselector)
+
 ## Installation
 
 ```javascript

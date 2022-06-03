@@ -1,5 +1,7 @@
 # @testjg/nativescript-filepicker
 
+[![npm version](https://badge.fury.io/js/@testjg%2Fnativescript-filepicker.svg)](https://badge.fury.io/js/@testjg%2Fnativescript-filepicker)
+
 ## Installation
 
 ```javascript

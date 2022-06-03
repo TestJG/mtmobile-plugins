@@ -1,5 +1,7 @@
 # @testjg/nativescript-sqlite
 
+[![npm version](https://badge.fury.io/js/@testjg%2Fnativescript-sqlite.svg)](https://badge.fury.io/js/@testjg%2Fnativescript-sqlite)
+
 ## Installation
 
 ```javascript

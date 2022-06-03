@@ -1,5 +1,7 @@
 # @testjg/nativescript-http
 
+[![npm version](https://badge.fury.io/js/@testjg%2Fnativescript-http.svg)](https://badge.fury.io/js/@testjg%2Fnativescript-http)
+
 Http helper lib. Under the hood it uses `okhttp` (v3) for Android and `NSURLSession` for iOS.
 
 Has peer dependencies on [url-join](https://github.com/jfromaniello/url-join/) and [rxjs](https://github.com/ReactiveX/rxjs).

@@ -1,5 +1,7 @@
 # @testjg/nativescript-nfc
 
+[![npm version](https://badge.fury.io/js/@testjg%2Fnativescript-guid.svg)](https://badge.fury.io/js/@testjg%2Fnativescript-guid)
+
 Based on the great and more complete: https://github.com/EddyVerbruggen/nativescript-nfc
 
 ## Installation
