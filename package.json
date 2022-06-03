@@ -47,5 +47,8 @@
     ]
   },
   "repository": "git@github.com:TestJG/mtmobile-plugins.git",
-  "author": "Josep Bergay <josep.bergay@gmail.com>"
+  "author": "Josep Bergay <josep.bergay@gmail.com>",
+  "dependencies": {
+    "url-join": "^5.0.0"
+  }
 }

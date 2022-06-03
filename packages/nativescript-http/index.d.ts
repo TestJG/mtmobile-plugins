@@ -1,3 +1,4 @@
-import { NativescriptHttpCommon } from './common';
+import { CreateHttp } from './common';
 
-export declare class NativescriptHttp extends NativescriptHttpCommon {}
+export declare const createHttp: CreateHttp;
+export * from './common';
