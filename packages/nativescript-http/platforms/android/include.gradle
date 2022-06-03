@@ -1,11 +1,3 @@
-// android {
-//   productFlavors {
-//     "nativescript-http" {
-//       dimension "nativescript-http"
-//     }
-//   }
-// }
-
 dependencies {
   implementation 'com.squareup.okhttp3:okhttp:3.14.9'
 }
