@@ -35,18 +35,6 @@ export class NfcService implements NfcApi {
 
     this.initNfcAdapter();
 
-    const activity = Application.android.foregroundActivity || Application.android.startActivity;
-
-    const intent = new android.content.Intent(activity, activity.getClass());
-    intent.addFlags(
-      android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP |
-        android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
-    );
-    this.pendingIntent = android.app.PendingIntent.getActivity(activity, 0, intent, 0);
-
-    // start nfc
-    const nfcAdapter = android.nfc.NfcAdapter.getDefaultAdapter(activity);
-
     // note: once peer2peer is supported, handle possible pending push messages here
 
     // only wire these events once
