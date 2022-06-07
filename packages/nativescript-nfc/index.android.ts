@@ -17,7 +17,7 @@ import {
 
 declare let Array: any;
 
-const nfcIntentHandler = NfcIntentHandler.new();
+export const nfcIntentHandler = NfcIntentHandler.new();
 
 export class NfcService implements NfcApi {
   private pendingIntent: android.app.PendingIntent;
