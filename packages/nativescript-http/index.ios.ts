@@ -109,7 +109,7 @@ export const createHttp: CreateHttp = (baseUrl, log?) => {
     const url = <string>urljoin(baseUrl, options.url);
     const req = NSMutableURLRequest.requestWithURL(NSURL.URLWithString(url));
     req.HTTPMethod = options.method;
-    createRequestHeaders(options.headers, req);
+    createRequestHeaders(options.headers || {}, req);
     if (Utils.isNullOrUndefined(options.content)) {
       return { req };
     }
