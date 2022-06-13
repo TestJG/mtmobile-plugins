@@ -1,5 +1,5 @@
 import { Application } from '@nativescript/core';
-import { NfcUriProtocols } from './common';
+import { NfcUriProtocols, log } from './common';
 import { NdefListenerOptions, NfcNdefData, NfcNdefRecord, NfcTagData } from './interfaces';
 
 let onTagDiscoveredListener: null | ((data: NfcTagData) => void) = null;
@@ -61,12 +61,12 @@ export class NfcIntentHandler {
           ndefJson.type = 'NDEF Push Protocol';
         }
         if (messages.length > 1) {
-          console.log('Expected 1 ndefMessage but found ' + messages.length);
+          log('Expected 1 ndefMessage but found ' + messages.length);
         }
       }
 
       if (onNdefDiscoveredListener === null) {
-        console.log(
+        log(
           'Ndef discovered, but no listener was set via setOnNdefDiscoveredListener. Ndef: ' +
             JSON.stringify(ndefJson)
         );
@@ -98,7 +98,7 @@ export class NfcIntentHandler {
       };
 
       if (onTagDiscoveredListener === null) {
-        console.log(
+        log(
           'Tag discovered, but no listener was set via setOnTagDiscoveredListener. Ndef: ' +
             JSON.stringify(result)
         );
@@ -230,7 +230,7 @@ export class NfcIntentHandler {
       }
       return result;
     } catch (e) {
-      console.log('Error in messageToJSON: ' + e);
+      log('Error in messageToJSON: ' + e);
       return null;
     }
   }

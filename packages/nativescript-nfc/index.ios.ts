@@ -1,4 +1,4 @@
-import { NfcUriProtocols } from './common';
+import { NfcUriProtocols, log } from './common';
 import {
   NdefListenerOptions,
   NfcApi,
@@ -61,7 +61,7 @@ export class NfcService implements NfcApi, NfcSessionInvalidator {
           new WeakRef(this),
           (data) => {
             if (!callback) {
-              console.log(
+              log(
                 'Ndef discovered, but no listener was set via setOnNdefDiscoveredListener. Ndef: ' +
                   JSON.stringify(data)
               );

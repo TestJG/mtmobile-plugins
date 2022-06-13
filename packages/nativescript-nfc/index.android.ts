@@ -5,7 +5,7 @@ import {
   Application,
   Utils,
 } from '@nativescript/core';
-import { NfcUriProtocols } from './common';
+import { NfcUriProtocols, log } from './common';
 import { NfcIntentHandler } from './nfcIntentHandler.android';
 import {
   NdefListenerOptions,
@@ -57,9 +57,7 @@ export class NfcService implements NfcApi {
             try {
               this.nfcAdapter.disableForegroundDispatch(args.activity);
             } catch (e) {
-              console.log(
-                'Illegal State Exception stopping NFC. Assuming application is terminating.'
-              );
+              log('Illegal State Exception stopping NFC. Assuming application is terminating.');
             }
           }
         }
@@ -236,7 +234,7 @@ export class NfcService implements NfcApi {
     try {
       ndef.connect();
     } catch (e) {
-      console.log('ndef connection error');
+      log('ndef connection error');
       return 'connection failed';
     }
 

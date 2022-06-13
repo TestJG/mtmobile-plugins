@@ -36,3 +36,5 @@ export const NfcUriProtocols = [
   'urn:epc:',
   'urn:nfc:',
 ];
+
+export const log = (...args: Parameters<typeof console.log>) => __DEV__ && console.log(...args);
