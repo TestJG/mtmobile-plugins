@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NfcUriProtocols, log } from './common';
 import {
   NdefListenerOptions,
@@ -123,6 +125,7 @@ class NFCNDEFReaderSessionDelegateImpl extends NSObject implements NFCNDEFReader
   public static new(): NFCNDEFReaderSessionDelegateImpl {
     try {
       NFCNDEFReaderSessionDelegateImpl.ObjCProtocols.push(NFCNDEFReaderSessionDelegate);
+      // eslint-disable-next-line no-empty
     } catch (ignore) {}
     return <NFCNDEFReaderSessionDelegateImpl>super.new();
   }

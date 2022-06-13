@@ -1,6 +1,5 @@
 import {
   AndroidActivityEventData,
-  AndroidActivityNewIntentEventData,
   AndroidApplication,
   Application,
   Utils,
@@ -21,8 +20,8 @@ export const nfcIntentHandler = NfcIntentHandler.new();
 
 export class NfcService implements NfcApi {
   private pendingIntent: android.app.PendingIntent;
-  private intentFilters: any;
-  private techLists: any;
+  private intentFilters: androidNative.Array<android.content.IntentFilter>;
+  private techLists: androidNative.Array<androidNative.Array<string>>;
   private static firstInstance = true;
   private created = false;
   private started = false;
@@ -42,17 +41,14 @@ export class NfcService implements NfcApi {
       NfcService.firstInstance = false;
 
       // The Nfc adapter may not yet be ready, in case the class was instantiated in a very early stage of the app.
-      Application.android.on(
-        AndroidApplication.activityCreatedEvent,
-        (args: AndroidActivityEventData) => {
-          this.initNfcAdapter();
-        }
-      );
+      Application.android.on(AndroidApplication.activityCreatedEvent, () => {
+        this.initNfcAdapter();
+      });
 
       Application.android.on(
         AndroidApplication.activityPausedEvent,
         (args: AndroidActivityEventData) => {
-          let pausingNfcAdapter = android.nfc.NfcAdapter.getDefaultAdapter(args.activity);
+          const pausingNfcAdapter = android.nfc.NfcAdapter.getDefaultAdapter(args.activity);
           if (pausingNfcAdapter !== null) {
             try {
               this.nfcAdapter.disableForegroundDispatch(args.activity);
@@ -66,7 +62,7 @@ export class NfcService implements NfcApi {
       Application.android.on(
         AndroidApplication.activityResumedEvent,
         (args: AndroidActivityEventData) => {
-          let resumingNfcAdapter = android.nfc.NfcAdapter.getDefaultAdapter(args.activity);
+          const resumingNfcAdapter = android.nfc.NfcAdapter.getDefaultAdapter(args.activity);
           if (resumingNfcAdapter !== null && !args.activity.isFinishing()) {
             this.started = true;
             resumingNfcAdapter.enableForegroundDispatch(
@@ -82,25 +78,22 @@ export class NfcService implements NfcApi {
       );
 
       // fired when a new tag is scanned
-      Application.android.on(
-        AndroidApplication.activityNewIntentEvent,
-        (args: AndroidActivityNewIntentEventData) => {
-          nfcIntentHandler.savedIntent = this.intent;
-          nfcIntentHandler.parseMessage();
-        }
-      );
+      Application.android.on(AndroidApplication.activityNewIntentEvent, () => {
+        nfcIntentHandler.savedIntent = this.intent;
+        nfcIntentHandler.parseMessage();
+      });
     }
   }
 
   public available() {
-    return new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve) => {
       const nfcAdapter = android.nfc.NfcAdapter.getDefaultAdapter(Utils.ad.getApplicationContext());
       resolve(nfcAdapter !== null);
     });
   }
 
   public enabled() {
-    return new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve) => {
       const nfcAdapter = android.nfc.NfcAdapter.getDefaultAdapter(Utils.ad.getApplicationContext());
       resolve(nfcAdapter !== null && nfcAdapter.isEnabled());
     });
@@ -136,8 +129,7 @@ export class NfcService implements NfcApi {
       const payload = Array.create('byte', 0);
       records[0] = new android.nfc.NdefRecord(tnf, type, id, payload);
 
-      // avoiding a TS issue in the generate Android definitions
-      const ndefClass = android.nfc.NdefMessage as any;
+      const ndefClass = android.nfc.NdefMessage;
       const ndefMessage = new ndefClass(records);
 
       const errorMessage = this.writeNdefMessage(ndefMessage, tag);
@@ -168,8 +160,7 @@ export class NfcService implements NfcApi {
 
         const records = this.jsonToNdefRecords(arg);
 
-        // avoiding a TS issue in the generate Android definitions
-        const ndefClass = android.nfc.NdefMessage as any;
+        const ndefClass = android.nfc.NdefMessage;
         const ndefMessage = new ndefClass(records);
 
         const errorMessage = this.writeNdefMessage(ndefMessage, tag);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Application } from '@nativescript/core';
 import { NfcUriProtocols, log } from './common';
 import { NdefListenerOptions, NfcNdefData, NfcNdefRecord, NfcTagData } from './interfaces';
@@ -12,10 +13,8 @@ export class NfcIntentHandler {
     return new NfcIntentHandler();
   }
 
-  constructor() {}
-
   public setOnTagDiscoveredListener(callback: (data: NfcTagData) => void): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       onTagDiscoveredListener = callback;
       resolve();
     });
@@ -25,7 +24,7 @@ export class NfcIntentHandler {
     callback: (data: NfcNdefData) => void,
     options?: NdefListenerOptions
   ): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       // TODO use options, some day
       onNdefDiscoveredListener = callback;
       resolve();
