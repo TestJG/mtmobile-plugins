@@ -71,7 +71,7 @@ class MediafilepickerDocumentPickerDelegate extends NSObject implements UIDocume
 
   static resolveNSUrl(url: NSURL) {
     let path = url.absoluteString.replace('file:///private', '');
-    path = url.absoluteString.replace('file:///', '');
+    path = decodeURI(url.absoluteString.replace('file:///', ''));
     const name = path.split('/').pop();
     MediafilepickerDocumentPickerDelegate.resolve({
       path,
