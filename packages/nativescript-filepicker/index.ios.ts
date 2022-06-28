@@ -1,5 +1,5 @@
 import { Utils } from '@nativescript/core';
-import { FilePickerResult, parseOptions, ShowFilePickerOptions } from './common';
+import { FilePickerResult, octetStreamMime, parseOptions, ShowFilePickerOptions } from './common';
 
 export const showFilePicker = (options?: ShowFilePickerOptions) => {
   options = parseOptions(options);
@@ -86,10 +86,14 @@ const getMime = (fileName: string) => {
     kUTTagClassFilenameExtension,
     fileName.split('.').pop(),
     null
-  );
-  const mime = UTTypeCopyPreferredTagWithClass(
-    uti ? uti.takeRetainedValue() : null,
-    kUTTagClassMIMEType
-  );
-  return mime ? mime.takeRetainedValue() : null;
+  )?.takeRetainedValue();
+
+  if (uti) {
+    const mime = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue();
+    if (mime) {
+      return `${mime}`;
+    }
+  }
+
+  return octetStreamMime;
 };

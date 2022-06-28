@@ -1,4 +1,4 @@
-import { FilePickerResult, parseOptions, ShowFilePickerOptions } from './common';
+import { FilePickerResult, octetStreamMime, parseOptions, ShowFilePickerOptions } from './common';
 import {
   knownFolders,
   File,
@@ -59,7 +59,7 @@ export const showFilePicker = (options?: ShowFilePickerOptions): Promise<FilePic
               android.webkit.MimeTypeMap.getSingleton().getMimeTypeFromExtension(
                 name.split('.').pop()
               ) ||
-              'application/octet-stream',
+              octetStreamMime,
           };
           resolve(result);
         } catch (error) {

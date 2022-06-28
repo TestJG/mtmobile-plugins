@@ -17,3 +17,5 @@ export const parseOptions = (options?: ShowFilePickerOptions) => {
   if (!options) return defaultOptions;
   return options;
 };
+
+export const octetStreamMime = 'application/octet-stream';
