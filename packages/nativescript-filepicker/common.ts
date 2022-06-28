@@ -1,7 +1,7 @@
 export interface FilePickerResult {
   path: string;
   name: string;
-  mime?: string;
+  mime: string;
 }
 
 export interface ShowFilePickerOptions {

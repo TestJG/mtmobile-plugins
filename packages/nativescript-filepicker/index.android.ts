@@ -6,6 +6,7 @@ import {
   AndroidApplication,
   AndroidActivityResultEventData,
 } from '@nativescript/core';
+export * from './common';
 
 const REQUEST_CODE = 1970;
 

@@ -1,5 +1,6 @@
 import { Utils } from '@nativescript/core';
 import { FilePickerResult, octetStreamMime, parseOptions, ShowFilePickerOptions } from './common';
+export * from './common';
 
 export const showFilePicker = (options?: ShowFilePickerOptions) => {
   options = parseOptions(options);
