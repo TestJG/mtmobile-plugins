@@ -1,1 +1,4 @@
-export const createGuid = (): string => NSUUID.new().UUIDString.toLowerCase();
+import { parseGuid } from './common';
+
+export const createGuid = (separator?: string): string =>
+  parseGuid(NSUUID.new().UUIDString.toLowerCase(), separator);

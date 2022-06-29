@@ -7,6 +7,16 @@
         (tap)="demoShared.testIt()"
         class="btn btn-primary"
       ></Button>
+      <Button
+        text="With empty separator"
+        (tap)="demoShared.withEmptySeparator()"
+        class="btn btn-primary"
+      ></Button>
+      <Button
+        text="With slash separator"
+        (tap)="demoShared.withSlashSeparator()"
+        class="btn btn-primary"
+      ></Button>
       <Label [text]="demoShared.guid" textWrap="true"></Label>
     </StackLayout>
   </ScrollView>

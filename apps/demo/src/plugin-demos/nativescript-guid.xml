@@ -7,6 +7,14 @@
         <ScrollView class="h-full">
           <StackLayout>
             <Button text="Test nativescript-guid" tap="{{ testIt }}" class="btn btn-primary"/>
+            <Button
+              text="With empty separator"
+              tap="{{ withEmptySeparator }}"
+              class="btn btn-primary"/>
+            <Button
+              text="With slash separator"
+              tap="{{ withSlashSeparator }}"
+              class="btn btn-primary"/>
             <Label text="{{ guid }}" class="text-primary" />
           </StackLayout>
         </ScrollView>
