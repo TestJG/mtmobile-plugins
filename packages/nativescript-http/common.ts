@@ -259,7 +259,7 @@ export interface IHttpResponse {
   statusCode: number;
   headers: HttpResponseHeaders;
   text(): Observable<string>;
-  json(): Observable<any>;
+  json<T>(): Observable<T>;
   bytes(): Observable<androidNative.Array<number>>;
   save(fileName: string): Observable<void>;
 }
