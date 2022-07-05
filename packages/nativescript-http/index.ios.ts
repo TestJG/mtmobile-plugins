@@ -12,6 +12,7 @@ import {
   IHttpResponse,
   loopHeaders,
   MultiPartRequestBody,
+  NOOP,
   printContentSummary,
   printHeaders,
   TransientError,
@@ -129,11 +130,12 @@ export const createHttp: CreateHttp = (baseUrl, log?) => {
         );
         req.setValueForHTTPHeaderField(content.mediaType, 'Content-Type');
         break;
-      case 'multipart':
+      case 'multipart': {
         const { header, uploadPath } = createMultiPart(content);
         multiPartFilePath = uploadPath;
         req.setValueForHTTPHeaderField(header['Content-Type'], 'Content-Type');
         break;
+      }
     }
     return { req, multiPartFilePath };
   };
@@ -236,7 +238,9 @@ export const createHttp: CreateHttp = (baseUrl, log?) => {
           let body = NSString.alloc().initWithDataEncoding(data, NSUTF8StringEncoding).toString();
           try {
             body = JSON.parse(body);
-          } catch (e) {}
+          } catch (e) {
+            //
+          }
           const content = {
             body,
             description: error.description,
@@ -272,7 +276,7 @@ export const createHttp: CreateHttp = (baseUrl, log?) => {
           task = session.dataTaskWithRequestCompletionHandler(req, handler());
         }
         task.resume();
-        return task ? () => task.cancel() : () => {};
+        return task ? () => task.cancel() : NOOP;
       }).pipe(
         map(({ content, res }) => createFromSuccessResponse(res, content)),
         map((response) => {

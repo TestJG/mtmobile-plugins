@@ -147,6 +147,7 @@ export const createHttp: CreateHttp = (baseUrl, log?) => {
         const output = new java.io.FileOutputStream(fileName);
         const source = resp.body().source();
         const buffer: androidNative.Array<number> = Array.create('byte', 4096);
+        // eslint-disable-next-line no-constant-condition
         while (true) {
           const count = source.read(buffer, 0, 4096);
           if (count <= 0) break;
