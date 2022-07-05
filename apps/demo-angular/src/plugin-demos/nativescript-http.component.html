@@ -3,8 +3,13 @@
   <ScrollView class="h-full">
     <StackLayout>
       <Button
-        text="Test nativescript-http"
+        text="Test nativescript-http GET"
         (tap)="demoShared.testIt()"
+        class="btn btn-primary"
+      ></Button>
+      <Button
+        text="Test nativescript-http POST"
+        (tap)="demoShared.postIt()"
         class="btn btn-primary"
       ></Button>
     </StackLayout>

@@ -6,8 +6,9 @@
     <StackLayout class="p-20">
         <ScrollView class="h-full">
           <StackLayout>
-            <Button text="Test nativescript-http" tap="{{ testIt }}" class="btn btn-primary"/>
+            <Button text="Test nativescript-http GET" tap="{{ testIt }}" class="btn btn-primary"/>
 
+      <Button text="Test nativescript-http POST" tap="{{ postIt }}" class="btn btn-primary"/>
           </StackLayout>
         </ScrollView>
     </StackLayout>
