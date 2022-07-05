@@ -1,5 +1,4 @@
-import { createHttp } from '@testjg/nativescript-http';
-import { firstValueFrom } from 'rxjs';
+import { createHttp, jsonBody } from '@testjg/nativescript-http';
 import { switchMap } from 'rxjs/operators';
 import { DemoSharedBase } from '../utils';
 
@@ -8,17 +7,38 @@ export class DemoSharedNativescriptHttp extends DemoSharedBase {
   maxTodos = 200;
 
   testIt() {
-    this.safeAction(async () => {
+    this.safeAction(() => {
       const id = Math.floor(Math.random() * this.maxTodos) + 1;
-      const json$ = this.http
+      return this.http
         .request({
           method: 'GET',
           url: `todos/${id}`,
           headers: { 'Accept-Language': ['ca', 'en'] },
         })
-        .pipe(switchMap((res) => res.json()));
+        .pipe(switchMap((res) => res.json<Todo[]>()));
+    }, true);
+  }
 
-      return firstValueFrom(json$);
+  postIt() {
+    this.safeAction(() => {
+      return this.http
+        .request({
+          method: 'POST',
+          url: `todos`,
+          content: jsonBody<Omit<Todo, 'id'>>({
+            title: 'new_title',
+            completed: false,
+            userId: 1,
+          }),
+        })
+        .pipe(switchMap((r) => r.json<Todo>()));
     }, true);
   }
 }
+
+type Todo = {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+};
