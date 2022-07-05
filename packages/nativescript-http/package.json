@@ -1,6 +1,6 @@
 {
   "name": "@testjg/nativescript-http",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Add a plugin description",
   "main": "index",
   "typings": "index.d.ts",
