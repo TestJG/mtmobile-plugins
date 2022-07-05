@@ -31,12 +31,12 @@ export const textBody = (text: string, mediaType = 'text/plain'): TextRequestBod
   mediaType,
 });
 
-export interface JsonRequestBody extends RequestBodyBase {
+export interface JsonRequestBody<T> extends RequestBodyBase {
   type: 'json';
-  value: any;
+  value: T;
 }
 
-export const jsonBody = (value: any, mediaType = 'application/json'): JsonRequestBody => ({
+export const jsonBody = <T>(value: T, mediaType = 'application/json'): JsonRequestBody<T> => ({
   type: 'json',
   value,
   mediaType,
@@ -75,61 +75,67 @@ export const formValuePart = (name: string, value: string): FormValuePart => ({
   value,
 });
 
-export interface FormFilePart {
+export interface FormFilePart<T> {
   type: 'form-file';
   name: string;
   fileName: string;
-  body: RequestBody;
+  body: RequestBody<T>;
 }
 
-export const formFilePart = (name: string, fileName: string, body: RequestBody): FormFilePart => ({
+export const formFilePart = <T>(
+  name: string,
+  fileName: string,
+  body: RequestBody<T>
+): FormFilePart<T> => ({
   type: 'form-file',
   name,
   fileName,
   body,
 });
 
-export interface GenericPart {
+export interface GenericPart<T> {
   type: 'part';
   name: string;
-  body: RequestBody;
+  body: RequestBody<T>;
   headers?: HttpRequestHeaders;
 }
 
-export const part = (
+export const part = <T>(
   name: string,
-  body: RequestBody,
+  body: RequestBody<T>,
   headers?: HttpRequestHeaders
-): GenericPart => ({
+): GenericPart<T> => ({
   type: 'part',
   name,
   body,
   headers,
 });
 
-export type MultiPartRequestPart = FormValuePart | FormFilePart | GenericPart;
+export type MultiPartRequestPart<T> = FormValuePart | FormFilePart<T> | GenericPart<T>;
 
-export interface MultiPartRequestBody extends RequestBodyBase {
+export type MultiPartRequestPartTuple<T> = { [P in keyof T]: MultiPartRequestPart<T[P]> };
+
+export interface MultiPartRequestBody<A extends readonly unknown[]> extends RequestBodyBase {
   type: 'multipart';
   mediaType: MultiPartMediaType;
-  parts: MultiPartRequestPart[];
+  parts: readonly [...MultiPartRequestPartTuple<A>];
 }
 
-export const multiPartBody = (
-  parts: MultiPartRequestPart[],
+export const multiPartBody = <A extends readonly unknown[]>(
+  parts: MultiPartRequestPartTuple<A>,
   mediaType: MultiPartMediaType = 'multipart/form-data'
-): MultiPartRequestBody => ({
+): MultiPartRequestBody<A> => ({
   type: 'multipart',
   parts,
   mediaType,
 });
 
-export type RequestBody =
+export type RequestBody<T> =
   | FileRequestBody
   | TextRequestBody
-  | JsonRequestBody
+  | JsonRequestBody<T>
   | BytesRequestBody
-  | MultiPartRequestBody;
+  | MultiPartRequestBody<T extends unknown[] ? T[] : never>;
 
 export type HttpRequestMethod = 'GET' | 'POST';
 export type HttpRequestHeaderValue = string | string[];
@@ -158,7 +164,7 @@ export const loopHeaders = (
   }
 };
 
-export const printHeaders = (headers: HttpRequestHeaders, indentation: string = ''): string => {
+export const printHeaders = (headers: HttpRequestHeaders, indentation = ''): string => {
   if (Utils.isNullOrUndefined(headers)) return 'NO HEADERS';
 
   let result = '';
@@ -173,7 +179,7 @@ export const printHeaders = (headers: HttpRequestHeaders, indentation: string = 
   return result || 'NO HEADERS';
 };
 
-export const printContentSummary = (body: RequestBody): string => {
+export const printContentSummary = <T>(body: RequestBody<T>): string => {
   if (Utils.isNullOrUndefined(body)) return 'NO BODY';
 
   let result = '';
@@ -186,7 +192,7 @@ export const printContentSummary = (body: RequestBody): string => {
   const indent = () => (indentation += '    ');
   const unIndent = () => (indentation = indentation.substring(0, indentation.length - 4));
 
-  const loopPart = (p: MultiPartRequestPart) => {
+  const loopPart = <K>(p: MultiPartRequestPart<K>) => {
     switch (p.type) {
       case 'form-value':
         append(`FORM-VALUE: ${p.name} = ${p.value.slice(0, 60)}`);
@@ -209,7 +215,7 @@ export const printContentSummary = (body: RequestBody): string => {
     }
   };
 
-  const loop = (b: RequestBody) => {
+  const loop = <K>(b: RequestBody<K>) => {
     switch (b.type) {
       case 'bytes':
         append(`BYTES: ${b.mediaType} with ${b.value.length} bytes`);
@@ -248,11 +254,11 @@ export const printContentSummary = (body: RequestBody): string => {
   return result || 'NO BODY';
 };
 
-export interface IHttpRequest {
+export interface IHttpRequest<T> {
   url: string;
   method: HttpRequestMethod;
   headers?: HttpRequestHeaders;
-  content?: RequestBody;
+  content?: RequestBody<T>;
 }
 
 export interface IHttpResponse {
@@ -265,7 +271,7 @@ export interface IHttpResponse {
 }
 
 export interface IHttp {
-  request(options: IHttpRequest): Observable<IHttpResponse>;
+  request<T>(options: IHttpRequest<T>): Observable<IHttpResponse>;
 }
 
 type Logger = (...args: (string | (() => string))[]) => void;
@@ -279,7 +285,7 @@ export const NOOP = () => {
 export const getLogger = (log: Logger | undefined) => log ?? NOOP;
 
 export function forRelativeUrl(relativeUrl: string, http: IHttp): IHttp {
-  const request = (options: IHttpRequest): Observable<IHttpResponse> => {
+  const request = <T>(options: IHttpRequest<T>): Observable<IHttpResponse> => {
     const newUrl = urljoin(relativeUrl, options.url);
     const newRequest = { ...options, url: newUrl };
     return http.request(newRequest);

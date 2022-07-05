@@ -65,7 +65,9 @@ export const createHttp: CreateHttp = (baseUrl, log?) => {
     return result;
   };
 
-  const createRequestBody = (content: RequestBody): okhttp3.RequestBody => {
+  const createRequestBody = (
+    content: RequestBody<unknown> | RequestBody<unknown[]>
+  ): okhttp3.RequestBody => {
     if (Utils.isNullOrUndefined(content)) {
       return null;
     }
@@ -119,7 +121,7 @@ export const createHttp: CreateHttp = (baseUrl, log?) => {
     }
   };
 
-  const createOkRequest = (options: IHttpRequest): okhttp3.Request => {
+  const createOkRequest = (options: IHttpRequest<unknown>): okhttp3.Request => {
     const url = urljoin(baseUrl, options.url) as string;
     const builder = new okhttp3.Request.Builder();
 
@@ -178,7 +180,7 @@ export const createHttp: CreateHttp = (baseUrl, log?) => {
   };
 
   return {
-    request: (options: IHttpRequest): Observable<IHttpResponse> =>
+    request: <T>(options: IHttpRequest<T>): Observable<IHttpResponse> =>
       new Observable<IHttpResponse>((obs) => {
         const req = createOkRequest(options);
 

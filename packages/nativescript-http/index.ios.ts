@@ -107,7 +107,7 @@ export const createHttp: CreateHttp = (baseUrl, log?) => {
   const createRequestHeaders = (headers: HttpRequestHeaders, req: NSMutableURLRequest) =>
     loopHeaders(headers, (key, value) => req.addValueForHTTPHeaderField(value, key));
 
-  const createRequest = (options: IHttpRequest) => {
+  const createRequest = (options: IHttpRequest<unknown>) => {
     const url = <string>urljoin(baseUrl, options.url);
     const req = NSMutableURLRequest.requestWithURL(NSURL.URLWithString(url));
     req.HTTPMethod = options.method;
@@ -191,7 +191,7 @@ export const createHttp: CreateHttp = (baseUrl, log?) => {
     return { uploadPath, header };
   };
 
-  const createMultiPart = (content: MultiPartRequestBody) => {
+  const createMultiPart = (content: MultiPartRequestBody<unknown[]>) => {
     const params = [];
     for (const part of content.parts) {
       switch (part.type) {
@@ -218,7 +218,7 @@ export const createHttp: CreateHttp = (baseUrl, log?) => {
   };
 
   return {
-    request: (options: IHttpRequest): Observable<IHttpResponse> =>
+    request: <T>(options: IHttpRequest<T>): Observable<IHttpResponse> =>
       new Observable<{ res: NSHTTPURLResponse; content: any }>((obs) => {
         log(`REQUEST: ${options.method}: ${options.url}`);
         log(() => printHeaders(options.headers));
