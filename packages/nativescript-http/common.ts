@@ -268,10 +268,15 @@ export interface IHttp {
   request(options: IHttpRequest): Observable<IHttpResponse>;
 }
 
-export type CreateHttp = (
-  baseUrl: string,
-  log?: (...args: (string | (() => string))[]) => void
-) => IHttp;
+type Logger = (...args: (string | (() => string))[]) => void;
+
+export type CreateHttp = (baseUrl: string, log?: Logger) => IHttp;
+
+export const NOOP = () => {
+  // No operation
+};
+
+export const getLogger = (log: Logger | undefined) => log ?? NOOP;
 
 export function forRelativeUrl(relativeUrl: string, http: IHttp): IHttp {
   const request = (options: IHttpRequest): Observable<IHttpResponse> => {

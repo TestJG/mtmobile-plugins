@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import urljoin from 'url-join';
 import {
   CreateHttp,
+  getLogger,
   getResponseError,
   HttpError,
   HttpRequestHeaders,
@@ -18,7 +19,7 @@ import {
 } from './common';
 
 export const createHttp: CreateHttp = (baseUrl, log?) => {
-  log = log ?? (() => {});
+  log = getLogger(log);
 
   log(`USING HTTP BASE URL: '${baseUrl}'`);
 
