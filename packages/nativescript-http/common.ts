@@ -135,7 +135,7 @@ export type RequestBody<T> =
   | TextRequestBody
   | JsonRequestBody<T>
   | BytesRequestBody
-  | MultiPartRequestBody<T extends unknown[] ? T[] : never>;
+  | MultiPartRequestBody<T extends unknown[] ? T : never>;
 
 export type HttpRequestMethod = 'GET' | 'POST';
 export type HttpRequestHeaderValue = string | string[];
