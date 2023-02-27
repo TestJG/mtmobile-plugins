@@ -185,7 +185,18 @@ export class NfcService implements NfcApi {
           android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP |
             android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
         );
-        this.pendingIntent = android.app.PendingIntent.getActivity(activity, 0, this.intent, 0);
+
+        if (android.os.Build.VERSION.SDK_INT >= 31) {
+          // android.os.Build.VERSION_CODES.S
+          this.pendingIntent = android.app.PendingIntent.getActivity(
+            activity,
+            0,
+            this.intent,
+            android.app.PendingIntent.FLAG_MUTABLE
+          );
+        } else {
+          this.pendingIntent = android.app.PendingIntent.getActivity(activity, 0, this.intent, 0);
+        }
 
         // The adapter must be started with the foreground activity.
         // This allows to start it as soon as possible but only once.
