@@ -1,5 +1,6 @@
 {
-  "root": "packages/nativescript-guid",
+  "name": "nativescript-guid",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "packages/nativescript-guid",
   "targets": {
@@ -29,12 +30,12 @@
       }
     },
     "build.all": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": ["node tools/scripts/build-finish.ts nativescript-guid"],
         "parallel": false
       },
-      "outputs": ["dist/packages/nativescript-guid"],
+      "outputs": ["{workspaceRoot}/dist/packages/nativescript-guid"],
       "dependsOn": [
         {
           "target": "build.all",
@@ -47,7 +48,7 @@
       ]
     },
     "focus": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": ["nx g @nativescript/plugin-tools:focus-packages nativescript-guid"],
         "parallel": false
