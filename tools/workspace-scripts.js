@@ -138,7 +138,7 @@ module.exports = {
         description: 'Focus on @testjg/nativescript-http',
       },
       reset: {
-        script: 'nx g @testjg/plugin-tools:focus-packages',
+        script: 'nx g @nativescript/plugin-tools:focus-packages',
         description: 'Reset Focus',
       },
     },
