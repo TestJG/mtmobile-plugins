@@ -10,7 +10,7 @@
     "@testjg/nativescript-http": "file:../../dist/packages/nativescript-http"
   },
   "devDependencies": {
-    "@nativescript/android": "~8.4.0",
-    "@nativescript/ios": "~8.4.0"
+    "@nativescript/android": "~8.5.0",
+    "@nativescript/ios": "~8.5.0"
   }
 }
