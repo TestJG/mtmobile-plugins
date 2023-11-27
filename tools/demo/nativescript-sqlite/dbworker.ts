@@ -1,3 +1,4 @@
+import '@nativescript/core/globals';
 import { knownFolders } from '@nativescript/core';
 import type { SQLiteDatabase } from '@testjg/nativescript-sqlite';
 import {
@@ -12,8 +13,6 @@ import {
   simpleInsert,
 } from './db.utils';
 import type { MessageData, ResponseMessage } from './worker-types';
-
-require('@nativescript/core/globals');
 
 const dbName = 'data-worker.db';
 const path = `${knownFolders.documents().path}/${dbName}`;
