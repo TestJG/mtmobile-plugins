@@ -165,7 +165,6 @@ class NFCNDEFReaderSessionDelegateImpl extends NSObject implements NFCNDEFReader
     session: NFCNDEFReaderSession,
     messages: NSArray<NFCNDEFMessage>
   ): void {
-    console.log('>> readerSessionDidDetectNDEFs');
     const firstMessage = messages[0];
     if (this.options && this.options.stopAfterFirstRead) {
       setTimeout(() => this._owner.get().invalidateSession());

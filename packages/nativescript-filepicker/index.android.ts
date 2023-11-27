@@ -16,6 +16,7 @@ export const showFilePicker = (options?: ShowFilePickerOptions): Promise<FilePic
       options = parseOptions(options);
       const intent = new android.content.Intent();
       // intent.setAction("android.intent.action.OPEN_DOCUMENT");
+      // intent.setAction(android.content.Intent.ACTION_OPEN_DOCUMENT_TREE);
       intent.setAction(android.content.Intent.ACTION_GET_CONTENT);
       intent.setType('*/*');
       intent.addCategory(android.content.Intent.CATEGORY_OPENABLE);
@@ -35,7 +36,7 @@ export const showFilePicker = (options?: ShowFilePickerOptions): Promise<FilePic
           return;
         }
 
-        const uri = (args.intent as android.content.Intent).getData();
+        const uri = args.intent.getData();
         const contentResolver = activity.getContentResolver();
         const docFile = androidx.documentfile.provider.DocumentFile.fromSingleUri(activity, uri);
         const name = docFile.getName() || uri.getLastPathSegment();

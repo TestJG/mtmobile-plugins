@@ -43,6 +43,7 @@ export class DemoModel extends DemoSharedNativescriptNfc {
 
   updateLastDataRead(data: NfcNdefData) {
     this.lastDataRead = JSON.stringify(data);
+    console.log('data', data);
     this.notifyPropertyChange('lastDataRead', this.lastDataRead);
   }
 

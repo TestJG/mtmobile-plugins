@@ -29,6 +29,9 @@ export class DemoSharedNativescriptSqlite extends DemoSharedBase {
     this.worker.onmessage = (msg) => {
       console.log('FROM WORKER:', msg.data);
     };
+    this.worker.onerror = (e) => {
+      console.log('ERROR FROM WORKER', e);
+    };
   }
 
   private postToWorker(msg: MessageData) {
