@@ -112,6 +112,20 @@ export class NfcService implements NfcApi, NfcSessionInvalidator {
   public eraseTag() {
     return Promise.reject('Not available on iOS');
   }
+
+  // private ensureSession(callback:() => void, resolve: () => void, reject: () => void) {
+
+  //   if (!NfcService._available()) {
+  //     reject();
+  //     return;
+  //   }
+
+  //   if (callback === null) {
+  //     this.invalidateSession();
+  //     resolve();
+  //     return;
+  //   }
+  // }
 }
 
 @NativeClass()
@@ -151,6 +165,7 @@ class NFCNDEFReaderSessionDelegateImpl extends NSObject implements NFCNDEFReader
     session: NFCNDEFReaderSession,
     messages: NSArray<NFCNDEFMessage>
   ): void {
+    console.log('>> readerSessionDidDetectNDEFs');
     const firstMessage = messages[0];
     if (this.options && this.options.stopAfterFirstRead) {
       setTimeout(() => this._owner.get().invalidateSession());
@@ -158,6 +173,46 @@ class NFCNDEFReaderSessionDelegateImpl extends NSObject implements NFCNDEFReader
 
     // execute on the main thread with this trick
     this.resultCallback(NFCNDEFReaderSessionDelegateImpl.ndefToJson(firstMessage));
+  }
+
+  readerSessionDidDetectTags(
+    session: NFCNDEFReaderSession,
+    tags: NSArray<NFCNDEFTag> | NFCNDEFTag[]
+  ): void {
+    console.log('>> readerSessionDidDetectTags');
+    const tag = tags[0];
+    session.connectToTagCompletionHandler(tag, (error: NSError) => {
+      console.log('>> connected to tag, error: ', error);
+      if (error) {
+        console.log('>> error connecting to tag', error);
+        session.invalidateSessionWithErrorMessage('error connecting to tag');
+        return;
+      }
+      const ndefTag = new interop.Reference<NFCNDEFTag>(interop.types.id, tag).value;
+      // TODO either Text or URI
+      const payload = NFCNDEFPayload.wellKnownTypeTextPayloadWithStringLocale(
+        '123',
+        NSLocale.currentLocale
+      );
+      console.log('>> payload: ', payload);
+      const ndefMessage = NFCNDEFMessage.alloc().initWithNDEFRecords([payload]);
+      console.log('>> ndefMessage: ', ndefMessage);
+      // console.log('>> nfcNdefTag: ', nfcNdefTag, nfcNdefTag.writeNDEFCompletionHandler);
+      // console.log(
+      //   '>> nfcNdefTag proto: ',
+      //   nfcNdefTag,
+      //   NFCNDEFTag.prototype.writeNDEFCompletionHandler
+      // );
+      // if (nfcNdefTag.writeNDEFCompletionHandler) {
+      NFCNDEFTag.prototype.writeNDEFCompletionHandler.call(
+        ndefTag,
+        ndefMessage,
+        (error: NSError) => {
+          console.log('>> writeNDEFCompletionHandler, error: ', error);
+        }
+      );
+      // }
+    });
   }
 
   // If not commented iOS does not execute readerSessionDidDetectNDEFs, that's where we notify the
